@@ -4,18 +4,15 @@ import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
-import java.math.BigDecimal;
 import java.util.Set;
 
-@NoArgsConstructor
 @Getter
-@Setter
+@NoArgsConstructor
 @EqualsAndHashCode(of = "id")
-@Table(name = "tb_car_variants")
+@Table(name = "tb_permissions")
 @Entity
-public class CarVariant {
+public class Permission {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,15 +21,6 @@ public class CarVariant {
     @Column(nullable = false, unique = true)
     private String name;
 
-    private String manufacturer;
-
-    private String category;
-
-    private Integer year;
-
-    @Column(nullable = false)
-    private BigDecimal rentPrice;
-
-    @OneToMany(mappedBy = "tb_car_variants")
-    private Set<Car> cars;
+    @ManyToMany(mappedBy = "tb_permissions")
+    private Set<User> users;
 }

@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Set;
+
 @NoArgsConstructor
 @Getter
 @Setter
@@ -32,6 +34,10 @@ public class User {
     private String phoneNumber;
 
     private UserTypes userType;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "users_permissions", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "permission_id"))
+    private Set<Permission> permissions;
 
     public User(String username, String encryptedPassword, String email, String phoneNumber, UserTypes userType) {
         this.username = username;

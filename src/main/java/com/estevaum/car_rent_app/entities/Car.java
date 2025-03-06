@@ -25,6 +25,10 @@ public class Car {
     @Column(nullable = false)
     private Boolean available;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "car_variant_id")
+    private CarVariant model;
+
     public Car(String licensePlate, Boolean available) {
 
     }
