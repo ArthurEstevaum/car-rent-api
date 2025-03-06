@@ -30,7 +30,19 @@ public class Car {
     private CarVariant model;
 
     public Car(String licensePlate, Boolean available) {
+        setLicensePlate(licensePlate);
+        this.available = available;
+    }
 
+    public Car(String licensePlate, Boolean available, Boolean hasLegacyLicensePlate) {
+        if(hasLegacyLicensePlate) {
+            setLegacyLicensePlate(licensePlate);
+            this.available = available;
+            return;
+        }
+
+        setLicensePlate(licensePlate);
+        this.available = available;
     }
 
     public void setLicensePlate(String licensePlate) {
