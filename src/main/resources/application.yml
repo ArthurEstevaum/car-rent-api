@@ -1,0 +1,4 @@
+security:
+  keys:
+    public: classpath:app.pub
+    private: classpath:app.key
