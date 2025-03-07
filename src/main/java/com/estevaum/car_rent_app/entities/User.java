@@ -21,15 +21,18 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Setter
     @Column(nullable = false, unique = true)
     private String username;
 
     @Column(nullable = false)
     private String password;
 
+    @Setter
     @Column(nullable = false, unique = true)
     private String email;
 
+    @Setter
     @Column(nullable = false, unique = true)
     private String phoneNumber;
 
@@ -45,5 +48,9 @@ public class User {
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.userType = userType;
+    }
+
+    public void addPermission(Permission permission) {
+        this.permissions = Set.of(permission);
     }
 }

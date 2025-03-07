@@ -4,10 +4,12 @@ import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.Set;
 
 @Getter
+@Setter
 @NoArgsConstructor
 @EqualsAndHashCode(of = "id")
 @Table(name = "tb_permissions")
@@ -21,6 +23,6 @@ public class Permission {
     @Column(nullable = false, unique = true)
     private String name;
 
-    @ManyToMany(mappedBy = "tb_permissions")
+    @ManyToMany(mappedBy = "permissions")
     private Set<User> users;
 }

@@ -28,11 +28,11 @@ public class CarVariant {
 
     private String category;
 
-    private Integer year;
+    private Integer model_year;
 
     @Column(nullable = false)
     private BigDecimal rentPrice;
 
-    @OneToMany(mappedBy = "tb_car_variants")
+    @OneToMany(mappedBy = "model")
     private Set<Car> cars;
 }
