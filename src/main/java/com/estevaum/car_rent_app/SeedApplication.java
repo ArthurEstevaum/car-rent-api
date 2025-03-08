@@ -19,7 +19,6 @@ import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Set;
 
 @Component
 public class SeedApplication implements CommandLineRunner {
@@ -62,17 +61,26 @@ public class SeedApplication implements CommandLineRunner {
         user.addPermission(adminPermission);
         repository.save(user);
 
-        CarVariant carModel = new CarVariant("Eclipse", "Mitsubishi", "Esportivo", 2015, BigDecimal.valueOf(250));
-        CarVariant car2 = new CarVariant("Civic", "Honda", "Sedan", 2018, BigDecimal.valueOf(220));
-        CarVariant car3 = new CarVariant("Mustang", "Ford", "Esportivo", 2021, BigDecimal.valueOf(300));
-        CarVariant car4 = new CarVariant("Corolla", "Toyota", "Sedan", 2020, BigDecimal.valueOf(180));
-        CarVariant car5 = new CarVariant("Cherokee", "Jeep", "SUV", 2017, BigDecimal.valueOf(260));
+        CarVariant carModel = new CarVariant("Eclipse", "Mitsubishi", "Sportive", 2015, BigDecimal.valueOf(250));
+        CarVariant carVar2 = new CarVariant("Civic", "Honda", "Sedan", 2018, BigDecimal.valueOf(220));
+        CarVariant carVar3 = new CarVariant("Mustang", "Ford", "Sportive", 2021, BigDecimal.valueOf(300));
+        CarVariant carVar4 = new CarVariant("Corolla", "Toyota", "Sedan", 2020, BigDecimal.valueOf(180));
+        CarVariant carVar5 = new CarVariant("Cherokee", "Jeep", "SUV", 2017, BigDecimal.valueOf(260));
+        carVariantRepository.saveAll(List.of(carModel, carVar2, carVar3, carVar4, carVar5));
 
-        carVariantRepository.saveAll(List.of(carModel, car2, car3, car4, car5));
         Car car = new Car("KHZ1T89", true);
-        car.setCarVariant(carModel);
+        Car car2 = new Car("HDM9W42", true);
+        Car car3 = new Car("GYB7V37", true);
+        Car car4 = new Car("CHZ7Z14", true);
+        Car car5 = new Car("MMB2C53", true);
 
-        carRepository.save(car);
+        car.setCarVariant(carModel);
+        car2.setCarVariant(carVar2);
+        car3.setCarVariant(carVar3);
+        car4.setCarVariant(carVar4);
+        car5.setCarVariant(carVar5);
+
+        carRepository.saveAll(List.of(car, car2, car3, car4, car5));
 
         var token = authorizationServerService.createAccessToken(user.getUsername(), adminPassword);
 

@@ -1,5 +1,6 @@
 package com.estevaum.car_rent_app.controllers;
 
+import com.estevaum.car_rent_app.exceptions.CarNotFoundException;
 import com.estevaum.car_rent_app.exceptions.UserAlreadyExistsException;
 import com.estevaum.car_rent_app.exceptions.UserNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -23,6 +24,11 @@ public class ControllerAdvice {
 
     @ExceptionHandler(UserNotFoundException.class)
     public ResponseEntity<String> userNotFound(UserNotFoundException exception) {
+        return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(CarNotFoundException.class)
+    public ResponseEntity<String> carNotFound(CarNotFoundException exception) {
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
     }
 }

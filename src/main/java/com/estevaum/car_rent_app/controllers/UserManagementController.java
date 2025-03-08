@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Optional;
 
 @RequestMapping(value = "/users")
+@RestController
 public class UserManagementController {
 
     @Autowired

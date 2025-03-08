@@ -25,7 +25,7 @@ public class Car {
     @Column(nullable = false)
     private Boolean available;
 
-    @OneToOne()
+    @OneToOne
     private RentingContract currentContract;
 
     @ManyToOne(fetch = FetchType.EAGER)

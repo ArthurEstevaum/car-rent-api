@@ -28,7 +28,7 @@ public class CarVariant {
 
     private String category;
 
-    private Integer model_year;
+    private Integer modelYear;
 
     @Column(nullable = false)
     private BigDecimal rentPrice;
@@ -36,11 +36,11 @@ public class CarVariant {
     @OneToMany(mappedBy = "model")
     private Set<Car> cars;
 
-    public CarVariant(String name, String manufacturer, String category, Integer model_year, BigDecimal rentPrice) {
+    public CarVariant(String name, String manufacturer, String category, Integer modelYear, BigDecimal rentPrice) {
         this.name = name;
         this.manufacturer = manufacturer;
         this.category = category;
-        this.model_year = model_year;
+        this.modelYear = modelYear;
         this.rentPrice = rentPrice;
     }
 }
