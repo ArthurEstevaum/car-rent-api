@@ -25,6 +25,9 @@ public class Car {
     @Column(nullable = false)
     private Boolean available;
 
+    @OneToOne()
+    private RentingContract currentContract;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "car_variant_id")
     private CarVariant model;
@@ -71,4 +74,7 @@ public class Car {
         this.licensePlate = licensePlate;
     }
 
+    public void setCarVariant(CarVariant carVariant) {
+        model = carVariant;
+    }
 }
