@@ -43,9 +43,9 @@ public class UserManagementController {
         User user = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("Usuário não encontrado"));
 
         Optional.ofNullable(requestData.username()).ifPresent(user::setUsername);
-        Optional.of(requestData.email()).ifPresent(user::setEmail);
-        Optional.of(requestData.phoneNumber()).ifPresent(user::setPhoneNumber);
-        Optional.of(requestData.userType()).ifPresent(user::setUserType);
+        Optional.ofNullable(requestData.email()).ifPresent(user::setEmail);
+        Optional.ofNullable(requestData.phoneNumber()).ifPresent(user::setPhoneNumber);
+        Optional.ofNullable(requestData.userType()).ifPresent(user::setUserType);
         userRepository.save(user);
 
         return ResponseEntity.ok("Usuário atualizado com sucesso.");
