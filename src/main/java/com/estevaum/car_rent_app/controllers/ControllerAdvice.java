@@ -1,9 +1,6 @@
 package com.estevaum.car_rent_app.controllers;
 
-import com.estevaum.car_rent_app.exceptions.CarNotFoundException;
-import com.estevaum.car_rent_app.exceptions.CarVariantNotFoundException;
-import com.estevaum.car_rent_app.exceptions.UserAlreadyExistsException;
-import com.estevaum.car_rent_app.exceptions.UserNotFoundException;
+import com.estevaum.car_rent_app.exceptions.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -36,5 +33,10 @@ public class ControllerAdvice {
     @ExceptionHandler(CarVariantNotFoundException.class)
     public ResponseEntity<String> carVariantNotFound(CarVariantNotFoundException exception) {
         return new ResponseEntity<>(exception.getMessage(), HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(NumberOfContractsExceeded.class)
+    public ResponseEntity<String> numberOfContractsExceeded(NumberOfContractsExceeded exception) {
+        return new ResponseEntity<>(exception.getMessage(), HttpStatus.FORBIDDEN);
     }
 }

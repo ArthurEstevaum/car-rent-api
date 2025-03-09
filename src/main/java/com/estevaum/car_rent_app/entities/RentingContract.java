@@ -1,12 +1,12 @@
 package com.estevaum.car_rent_app.entities;
 
+import com.estevaum.car_rent_app.exceptions.InvalidDateException;
 import jakarta.persistence.*;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
-import java.util.Date;
+import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 
 @NoArgsConstructor
 @Getter
@@ -21,11 +21,40 @@ public class RentingContract {
     private Long id;
 
     @Column(nullable = false)
-    private Date startDate;
+    private LocalDate startDate;
 
     @Column(nullable = false)
-    private Date endDate;
+    private LocalDate endDate;
 
-    @OneToOne(mappedBy = "currentContract")
+    @ManyToOne
+    @JoinColumn(name = "car_id")
     private Car car;
+
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    public RentingContract(Car car, LocalDate endDate, LocalDate startDate, User user) {
+        if (endDate.isBefore(startDate)) {
+            throw new InvalidDateException("A data de término não pode ser anterior à data de início.");
+        }
+
+        this.car = car;
+        this.endDate = endDate;
+        this.startDate = startDate;
+        this.user = user;
+    }
+
+    public Boolean isCurrentContract() {
+        LocalDate now = LocalDate.now();
+
+        return now.isAfter(startDate) && now.isBefore(endDate);
+    }
+
+    public BigDecimal getContractTotalPrice() {
+        long contractDuration = ChronoUnit.DAYS.between(startDate, endDate);
+        BigDecimal dailyRentPrice = car.getModel().getRentPrice();
+
+        return dailyRentPrice.multiply(BigDecimal.valueOf(contractDuration));
+    }
 }
