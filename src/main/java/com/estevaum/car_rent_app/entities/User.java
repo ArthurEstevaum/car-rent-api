@@ -1,7 +1,6 @@
 package com.estevaum.car_rent_app.entities;
 
 import com.estevaum.car_rent_app.enums.UserTypes;
-import jakarta.annotation.Generated;
 import jakarta.persistence.*;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -41,7 +40,7 @@ public class User {
     private UserTypes userType;
 
     @OneToMany(mappedBy = "user")
-    private Set<RentingContract> currentContracts;
+    private Set<RentingContract> contracts;
 
     @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(name = "users_permissions", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "permission_id"))
@@ -60,7 +59,7 @@ public class User {
     }
 
     public Boolean hasActiveContracts() {
-        Set<RentingContract> activeContracts = currentContracts.stream().filter(RentingContract::isCurrentContract).collect(Collectors.toSet());
+        Set<RentingContract> activeContracts = contracts.stream().filter(RentingContract::isCurrentContract).collect(Collectors.toSet());
 
         return !activeContracts.isEmpty();
     }

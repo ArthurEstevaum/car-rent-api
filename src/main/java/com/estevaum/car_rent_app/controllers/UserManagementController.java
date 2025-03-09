@@ -26,21 +26,21 @@ public class UserManagementController {
 
     @GetMapping("/{username}")
     public ResponseEntity<User> searchUserByUsername(@PathVariable String username) {
-        User user = userRepository.findByUsername(username).orElseThrow(() -> new UserNotFoundException("Usuário não encontrado."));
+        User user = userRepository.findByUsername(username).orElseThrow(UserNotFoundException::new);
 
         return ResponseEntity.ok(user);
     }
 
     @GetMapping("/{email}")
     public ResponseEntity<User> searchUserByEmail(@PathVariable String email) {
-        User user = userRepository.findByEmail(email).orElseThrow(() -> new UserNotFoundException("Usuário não encontrado"));
+        User user = userRepository.findByEmail(email).orElseThrow(UserNotFoundException::new);
 
         return ResponseEntity.ok(user);
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<String> updateUser(@PathVariable Long id, @RequestBody UpdateUserRequestDTO requestData) {
-        User user = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("Usuário não encontrado"));
+        User user = userRepository.findById(id).orElseThrow(UserNotFoundException::new);
 
         Optional.ofNullable(requestData.username()).ifPresent(user::setUsername);
         Optional.ofNullable(requestData.email()).ifPresent(user::setEmail);

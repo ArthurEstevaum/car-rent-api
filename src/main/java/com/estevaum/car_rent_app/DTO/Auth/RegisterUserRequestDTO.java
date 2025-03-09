@@ -1,4 +1,4 @@
-package com.estevaum.car_rent_app.DTO;
+package com.estevaum.car_rent_app.DTO.Auth;
 
 import com.estevaum.car_rent_app.enums.UserTypes;
 import jakarta.validation.constraints.Email;

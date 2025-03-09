@@ -1,4 +1,4 @@
-package com.estevaum.car_rent_app.DTO;
+package com.estevaum.car_rent_app.DTO.Cars;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;

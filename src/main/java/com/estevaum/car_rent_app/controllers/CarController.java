@@ -1,8 +1,8 @@
 package com.estevaum.car_rent_app.controllers;
 
-import com.estevaum.car_rent_app.DTO.CarRegistrationDTO;
-import com.estevaum.car_rent_app.DTO.CarShortInfoDTO;
-import com.estevaum.car_rent_app.DTO.CarUpdateDTO;
+import com.estevaum.car_rent_app.DTO.Cars.CarRegistrationDTO;
+import com.estevaum.car_rent_app.DTO.Cars.CarShortInfoDTO;
+import com.estevaum.car_rent_app.DTO.Cars.CarUpdateDTO;
 import com.estevaum.car_rent_app.entities.Car;
 import com.estevaum.car_rent_app.entities.CarVariant;
 import com.estevaum.car_rent_app.exceptions.CarNotFoundException;

@@ -1,8 +1,7 @@
-package com.estevaum.car_rent_app.DTO;
+package com.estevaum.car_rent_app.DTO.Contracts;
 
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotNull;
-import org.springframework.cglib.core.Local;
 
 import java.time.LocalDate;
 

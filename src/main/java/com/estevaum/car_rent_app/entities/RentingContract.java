@@ -48,7 +48,7 @@ public class RentingContract {
     public Boolean isCurrentContract() {
         LocalDate now = LocalDate.now();
 
-        return now.isAfter(startDate) && now.isBefore(endDate);
+        return now.isBefore(endDate);
     }
 
     public BigDecimal getContractTotalPrice() {

@@ -7,6 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Set;
+
 @NoArgsConstructor
 @Getter
 @EqualsAndHashCode(of = "id")
@@ -26,7 +28,7 @@ public class Car {
     private Boolean available;
 
     @OneToMany(mappedBy = "car")
-    private RentingContract currentContract;
+    private Set<RentingContract> rentingContracts;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "car_variant_id")

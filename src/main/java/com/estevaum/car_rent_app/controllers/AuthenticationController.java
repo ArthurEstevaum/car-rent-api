@@ -1,9 +1,9 @@
 package com.estevaum.car_rent_app.controllers;
 
-import com.estevaum.car_rent_app.DTO.LoginRequestDTO;
-import com.estevaum.car_rent_app.DTO.LoginResponseDTO;
-import com.estevaum.car_rent_app.DTO.RegisterUserRequestDTO;
-import com.estevaum.car_rent_app.DTO.RegisterUserResponseDTO;
+import com.estevaum.car_rent_app.DTO.Auth.LoginRequestDTO;
+import com.estevaum.car_rent_app.DTO.Auth.LoginResponseDTO;
+import com.estevaum.car_rent_app.DTO.Auth.RegisterUserRequestDTO;
+import com.estevaum.car_rent_app.DTO.Auth.RegisterUserResponseDTO;
 import com.estevaum.car_rent_app.entities.Permission;
 import com.estevaum.car_rent_app.entities.User;
 import com.estevaum.car_rent_app.exceptions.UserAlreadyExistsException;
