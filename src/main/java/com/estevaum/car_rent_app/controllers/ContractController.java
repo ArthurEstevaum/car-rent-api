@@ -73,7 +73,26 @@ public class ContractController {
         return ResponseEntity.ok(contractResponse);
     };
 
-    @GetMapping()
+    @GetMapping("/car/{id}")
+    public ResponseEntity<List<ContractInfoDTO>> listCarContracts(@PathVariable Long id) {
+        if(!carRepository.existsById(id)) {
+            throw new CarNotFoundException("Carro não encontrado");
+        }
+
+        List<RentingContract> carContracts = contractRepository.findByCarId(id);
+
+        List<ContractInfoDTO> contractResponse = carContracts.stream().map(contract -> {
+            return new ContractInfoDTO(contract.getId(), contract.getStartDate(), contract.getEndDate(),
+                    contract.getContractTotalPrice(), contract.isCurrentContract() , new CarContractInfoDTO(contract.getCar().getLicensePlate(),
+                    contract.getCar().getId(), contract.getCar().getModel().getManufacturer(),
+                    contract.getCar().getModel().getName(), contract.getCar().getModel().getCategory(),
+                    contract.getCar().getModel().getModelYear()), new ContractUserInfoDTO(contract.getUser().getId(),
+                    contract.getUser().getUsername(), contract.getUser().getEmail(), contract.getUser().getPhoneNumber(),
+                    contract.getUser().getUserType()));
+        }).toList();
+
+        return ResponseEntity.ok(contractResponse);
+    }
 
     @PostMapping("/")
     public ResponseEntity<String> createRentingContract(@RequestBody @Valid CreateContractDTO requestData) {

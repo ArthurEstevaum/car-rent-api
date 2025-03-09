@@ -8,5 +8,7 @@ import java.util.List;
 public interface RentingContractRepository extends JpaRepository<RentingContract, Long> {
     public List<RentingContract> findByUserUsername(String username);
 
+    public List<RentingContract> findByCarId(Long id);
+
     public Boolean existsByCarId(Long id);
 }
