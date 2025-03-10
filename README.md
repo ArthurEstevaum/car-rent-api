@@ -1,6 +1,8 @@
 ## Diagrama de entidades ##
+
+```mermaid
 erDiagram
-    Contract {
+    RentingContract {
         int contractId
         date startDate
         date endDate
@@ -27,5 +29,6 @@ erDiagram
         string userType
     }
 
-    Contract }o--|| Car : "carInfo"
-    Contract }o--|| User : "userInfo"
+    RentingContract }o--|| Car : "Rented"
+    RentingContract }o--|| User : "Tenant"
+```
