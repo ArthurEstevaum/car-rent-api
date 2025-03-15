@@ -1,3 +1,11 @@
+##Rodando o projeto
+Instalando dependências e iniciando o projeto em http://localhost:8080
+```bash
+./gradlew clean build
+
+./gradlew bootRun
+```
+
 ## Documentação da API
 
 ### Carros
