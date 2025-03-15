@@ -20,6 +20,8 @@ openssl rsa -in app.key -pubout -out app.pub
 
 ### Login e cadastro
 
+#### Por padrão, o username gerado é admin e a senha é password
+
 Após realizar login, para acessar todas as rotas autenticadas, é necessário sempre entregar o token no header Authorization, no formato Bearer token.
 
 #### Realiza o login e devolve o token de autenticação
@@ -41,6 +43,28 @@ Exemplo de retorno:
     "accessToken":
 "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJPbmxpbmUgSldUIEJ1aWxkZXIiLCJpYXQiOjE3NDIwNDA5NDgsImV4cCI6MTc0MjA0MjE3MywiYXVkIjoid3d3LmV4YW1wbGUuY29tIiwic3ViIjoianJvY2tldEBleGFtcGxlLmNvbSIsIkdpdmVuTmFtZSI6IkpvaG5ueSIsIlN1cm5hbWUiOiJSb2NrZXQiLCJFbWFpbCI6Impyb2NrZXRAZXhhbXBsZS5jb20iLCJSb2xlIjpbIk1hbmFnZXIiLCJQcm9qZWN0IEFkbWluaXN0cmF0b3IiXX0.4ypWkjNvmC_LIONbkhJz_JSk5H8wdS12tOjjw5gwH2c",
     "expiresIn": 300
+}
+```
+#### Realiza o cadastro de um usuário no sistema
+
+```http
+  POST /auth/register
+```
+Exemplo de uso:
+```json
+{
+  "username": "exampleUser",
+  "password": "password123",
+  "email": "example@example.com",
+  "phoneNumber": "123456789",
+  "userType": "personal"
+}
+```
+
+Retorno:
+```json
+{
+  "message": "Usuário criado com sucesso"
 }
 ```
 
