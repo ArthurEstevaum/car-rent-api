@@ -1,5 +1,14 @@
 ## Rodando o projeto
-Instalando dependências e iniciando o projeto em http://localhost:8080
+
+### Gerando chave pública e privada (assinatura dos tokens gerados)
+**Na pasta raiz do projeto, executar:**
+```bash
+cd src/main/resources && openssl genrsa > app.key
+
+openssl rsa -in app.key -pubout -out app.pub
+```
+
+### Instalando dependências e iniciando o projeto em http://localhost:8080
 ```bash
 ./gradlew clean build
 
