@@ -15,10 +15,12 @@ import com.estevaum.car_rent_app.repositories.CarRepository;
 import com.estevaum.car_rent_app.repositories.RentingContractRepository;
 import com.estevaum.car_rent_app.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.function.Function;
 
+@Service
 public class ContractService {
 
     @Autowired
