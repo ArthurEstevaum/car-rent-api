@@ -10,6 +10,7 @@ import com.estevaum.car_rent_app.exceptions.UserAlreadyExistsException;
 import com.estevaum.car_rent_app.repositories.PermissionRepository;
 import com.estevaum.car_rent_app.repositories.UserRepository;
 import com.estevaum.car_rent_app.services.AuthorizationServerService;
+import com.estevaum.car_rent_app.services.RegisterUserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -27,13 +28,7 @@ public class AuthenticationController {
     private AuthorizationServerService authService;
 
     @Autowired
-    private BCryptPasswordEncoder passwordEncoder;
-
-    @Autowired
-    private PermissionRepository permissionRepository;
-
-    @Autowired
-    private UserRepository userRepository;
+    private RegisterUserService registerUserService;
 
     @PostMapping(value = "/login")
     public ResponseEntity<LoginResponseDTO> login(@Valid @RequestBody LoginRequestDTO requestData) throws Exception {
@@ -43,18 +38,8 @@ public class AuthenticationController {
     }
 
     @PostMapping(value = "/register")
-    public ResponseEntity<RegisterUserResponseDTO> register(@Valid @RequestBody RegisterUserRequestDTO requestData) throws Exception {
-        Permission permission = permissionRepository.findById(1L).orElseThrow();
-
-        Boolean userAlreadyExists = userRepository.existsByUsername(requestData.username());
-
-        if(userAlreadyExists) {
-            throw new UserAlreadyExistsException("Erro na requisição: o usuário já existe.");
-        }
-
-        User user = new User(requestData.username(), passwordEncoder.encode(requestData.password()), requestData.email(), requestData.phoneNumber(), requestData.userType());
-        user.addPermission(permission);
-        userRepository.save(user);
+    public ResponseEntity<RegisterUserResponseDTO> register(@Valid @RequestBody RegisterUserRequestDTO requestData) {
+        registerUserService.register(requestData);
 
         return ResponseEntity.ok(new RegisterUserResponseDTO("Usuário criado com sucesso"));
     }
