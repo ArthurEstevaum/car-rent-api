@@ -39,8 +39,8 @@ public class AuthenticationController {
 
     @PostMapping(value = "/register")
     public ResponseEntity<RegisterUserResponseDTO> register(@Valid @RequestBody RegisterUserRequestDTO requestData) {
-        registerUserService.register(requestData);
+        User user = registerUserService.register(requestData);
 
-        return ResponseEntity.ok(new RegisterUserResponseDTO("Usuário criado com sucesso"));
+        return ResponseEntity.ok(new RegisterUserResponseDTO("Usuário criado com sucesso", user.getUsername()));
     }
 }

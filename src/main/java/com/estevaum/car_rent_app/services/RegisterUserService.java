@@ -22,7 +22,7 @@ public class RegisterUserService {
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
 
-    public void register(RegisterUserRequestDTO requestData) throws UserAlreadyExistsException {
+    public User register(RegisterUserRequestDTO requestData) throws UserAlreadyExistsException {
         Permission permission = permissionRepository.findById(1L).orElseThrow();
 
         Boolean userAlreadyExists = userRepository.existsByUsername(requestData.username());
@@ -33,6 +33,6 @@ public class RegisterUserService {
 
         User user = new User(requestData.username(), passwordEncoder.encode(requestData.password()), requestData.email(), requestData.phoneNumber(), requestData.userType());
         user.addPermission(permission);
-        userRepository.save(user);
+        return userRepository.save(user);
     }
 }
