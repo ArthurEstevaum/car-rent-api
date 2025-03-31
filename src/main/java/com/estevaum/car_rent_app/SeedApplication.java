@@ -28,6 +28,9 @@ public class SeedApplication implements CommandLineRunner {
 
     @Value("${security.credentials.admin-password}")
     private String adminPassword;
+
+    @Value("${spring.datasource.username}")
+    private String dbUsername;
     
     @Autowired
     private BCryptPasswordEncoder passwordEncoder;
@@ -49,6 +52,7 @@ public class SeedApplication implements CommandLineRunner {
     @Override
     @Transactional
     public void run(String... args) throws Exception {
+        System.out.println(dbUsername);
 
         Permission userPermission = new Permission();
         userPermission.setName("user");
