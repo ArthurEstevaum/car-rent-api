@@ -12,6 +12,8 @@ services:
       APP_URL: "http://10.0.0.8:8080"
       ADMIN_PASSWORD: ${ADMIN_PASSWORD}
       ADMIN_USERNAME: ${ADMIN_USERNAME}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
     networks:
       - app-network
     depends_on:
