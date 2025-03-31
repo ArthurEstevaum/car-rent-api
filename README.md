@@ -1,3 +1,8 @@
+## Teste rápido
+Se você quer testar rapidamente a API, pode usar o endpoint público https://car-rent-api.skyecaravel.cloud/cars/
+Por questões de segurança e disponibilidade, os outros endpoints foram habilitados apenas para o superuser (admin) e usuários autenticados (registrado pelo admin).
+Caso queira testar todas as funcionalidades da API, favor entrar em contato através do e-mail arthurestevao631@gmail.com.
+
 ## Rodando o projeto
 
 ### Gerando chave pública e privada (assinatura dos tokens gerados)
