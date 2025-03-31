@@ -52,42 +52,40 @@ public class SeedApplication implements CommandLineRunner {
     @Override
     @Transactional
     public void run(String... args) throws Exception {
-        System.out.println(dbUsername);
+        if(permissionRepository.count() == 0 && repository.count() == 0) {
+            Permission userPermission = new Permission();
+            userPermission.setName("user");
+            Permission adminPermission = new Permission();
+            adminPermission.setName("admin");
+            permissionRepository.saveAll(List.of(userPermission, adminPermission));
 
-        Permission userPermission = new Permission();
-        userPermission.setName("user");
-        Permission adminPermission = new Permission();
-        adminPermission.setName("admin");
-        permissionRepository.saveAll(List.of(userPermission, adminPermission));
+            String encryptedPassword = passwordEncoder.encode(adminPassword);
+            User user = new User(adminUsername, encryptedPassword, "admin@example.com", "examplephonenumber", UserTypes.personal);
+            user.addPermission(adminPermission);
+            repository.save(user);
+        }
 
-        String encryptedPassword = passwordEncoder.encode(adminPassword);
-        User user = new User(adminUsername, encryptedPassword, "admin@example.com", "examplephonenumber", UserTypes.personal);
-        user.addPermission(adminPermission);
-        repository.save(user);
+        if(carVariantRepository.count() == 0 && carRepository.count() == 0) {
+            CarVariant carModel = new CarVariant("Eclipse", "Mitsubishi", "Sportive", 2015, BigDecimal.valueOf(250));
+            CarVariant carVar2 = new CarVariant("Civic", "Honda", "Sedan", 2018, BigDecimal.valueOf(220));
+            CarVariant carVar3 = new CarVariant("Mustang", "Ford", "Sportive", 2021, BigDecimal.valueOf(300));
+            CarVariant carVar4 = new CarVariant("Corolla", "Toyota", "Sedan", 2020, BigDecimal.valueOf(180));
+            CarVariant carVar5 = new CarVariant("Cherokee", "Jeep", "SUV", 2017, BigDecimal.valueOf(260));
+            carVariantRepository.saveAll(List.of(carModel, carVar2, carVar3, carVar4, carVar5));
 
-        CarVariant carModel = new CarVariant("Eclipse", "Mitsubishi", "Sportive", 2015, BigDecimal.valueOf(250));
-        CarVariant carVar2 = new CarVariant("Civic", "Honda", "Sedan", 2018, BigDecimal.valueOf(220));
-        CarVariant carVar3 = new CarVariant("Mustang", "Ford", "Sportive", 2021, BigDecimal.valueOf(300));
-        CarVariant carVar4 = new CarVariant("Corolla", "Toyota", "Sedan", 2020, BigDecimal.valueOf(180));
-        CarVariant carVar5 = new CarVariant("Cherokee", "Jeep", "SUV", 2017, BigDecimal.valueOf(260));
-        carVariantRepository.saveAll(List.of(carModel, carVar2, carVar3, carVar4, carVar5));
+            Car car = new Car("KHZ1T89", true);
+            Car car2 = new Car("HDM9W42", true);
+            Car car3 = new Car("GYB7V37", true);
+            Car car4 = new Car("CHZ7Z14", true);
+            Car car5 = new Car("MMB2C53", true);
 
-        Car car = new Car("KHZ1T89", true);
-        Car car2 = new Car("HDM9W42", true);
-        Car car3 = new Car("GYB7V37", true);
-        Car car4 = new Car("CHZ7Z14", true);
-        Car car5 = new Car("MMB2C53", true);
+            car.setCarVariant(carModel);
+            car2.setCarVariant(carVar2);
+            car3.setCarVariant(carVar3);
+            car4.setCarVariant(carVar4);
+            car5.setCarVariant(carVar5);
 
-        car.setCarVariant(carModel);
-        car2.setCarVariant(carVar2);
-        car3.setCarVariant(carVar3);
-        car4.setCarVariant(carVar4);
-        car5.setCarVariant(carVar5);
-
-        carRepository.saveAll(List.of(car, car2, car3, car4, car5));
-
-        var token = authorizationServerService.createAccessToken(user.getUsername(), adminPassword);
-
-        System.out.println(token);
+            carRepository.saveAll(List.of(car, car2, car3, car4, car5));
+        }
     }
 }
