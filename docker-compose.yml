@@ -1,0 +1,38 @@
+services:
+  app:
+    image: amazoncorretto:21
+    container_name: car-rent-app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      APP_ENV: prod
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD:password}
+      ADMIN_USERNAME: ${ADMIN_USERNAME:admin}
+    networks:
+      - app-network
+    depends_on:
+      - db
+
+  db:
+    image: postgres:15-alpine
+    container_name: postgres_db
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_DB: car_rent_db
+      POSTGRES_USER: ${POSTGRES_USER:postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:password}
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - app-network
+
+volumes:
+  db_data:
+    driver: local
+networks:
+  app-network:
+    driver: bridge

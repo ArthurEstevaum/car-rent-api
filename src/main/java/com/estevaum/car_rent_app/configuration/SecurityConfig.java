@@ -44,7 +44,7 @@ public class SecurityConfig {
                 .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()))
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers("/auth/**").permitAll()
-                        .requestMatchers("/h2-console/**").permitAll()
+                        .requestMatchers("/h2-console/**").hasAuthority("SCOPE_admin")
                         .requestMatchers(HttpMethod.GET, "/cars/**").permitAll()
                         .requestMatchers("/cars/**").hasAuthority("SCOPE_admin")
                         .anyRequest().authenticated())

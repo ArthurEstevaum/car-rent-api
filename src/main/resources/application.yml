@@ -1,22 +1,11 @@
 spring:
+  profiles:
+    active: ${APP_ENV:dev}
   security:
     oauth2:
       resourceserver:
         jwt:
           issuer-uri: ${APP_URL:http://localhost:8080}
-  datasource:
-    url: jdbc:h2:mem:testdb
-    driverClassName: org.h2.Driver
-    username: sa
-    password: password
-  jpa:
-    database-plaform: org.hibernate.dialect.H2Dialect
-    generate-ddl: true
-    hibernate.ddl-auto: update
-    show-sql: true
-    properties:
-      hibernate:
-        format-sql: true
 
 security:
   credentials:
