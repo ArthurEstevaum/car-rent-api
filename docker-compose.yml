@@ -9,8 +9,8 @@ services:
       - "8080:8080"
     environment:
       APP_ENV: prod
-      ADMIN_PASSWORD: ${ADMIN_PASSWORD-password}
-      ADMIN_USERNAME: ${ADMIN_USERNAME-admin}
+      ADMIN_PASSWORD: ${ADMIN_PASSWORD}
+      ADMIN_USERNAME: ${ADMIN_USERNAME}
     networks:
       - app-network
     depends_on:
