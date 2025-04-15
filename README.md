@@ -19,7 +19,6 @@ openssl rsa -in app.key -pubout -out app.pub
 
 ./gradlew bootRun
 ```
-**Observação:** ao final do comando *bootRun* o token JWT de autenticação aparecerá no console.
 
 ## Documentação da API
 
