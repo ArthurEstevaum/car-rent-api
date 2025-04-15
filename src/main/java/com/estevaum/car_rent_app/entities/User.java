@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -55,7 +56,10 @@ public class User {
     }
 
     public void addPermission(Permission permission) {
-        this.permissions = Set.of(permission);
+        if(this.permissions == null) {
+            this.permissions = new HashSet<>();
+        }
+        this.permissions.add(permission);
     }
 
     public Boolean hasActiveContracts() {
