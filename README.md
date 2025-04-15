@@ -6,7 +6,7 @@ Caso queira testar todas as funcionalidades da API, favor entrar em contato atra
 ## Rodando o projeto
 
 ### Gerando chave pública e privada (assinatura dos tokens gerados)
-**Na pasta raiz do projeto, executar:**
+**Executar o seguinte comando na raiz do projeto:**
 ```bash
 cd src/main/resources && openssl genrsa > app.key
 
